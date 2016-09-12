@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/texttest.unity
+  isLoaded: 1
+  isActive: 1
