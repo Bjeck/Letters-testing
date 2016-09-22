@@ -12,21 +12,37 @@ public class textswapper : MonoBehaviour {
 
 	public Dictionary<string, string> mods = new Dictionary<string, string> ();
 
+	public TraceryReader tr;
+
 	// Use this for initialization
 	void Start () {
-	
+		txt.text = s;
+
 	}
 
 
 
 	public void AcceptInput(){
-		List<string> mods = new List<string> (); mods.Add (ipf.text);
+		mods.Add("#name#",ipf.text);
 
-		ChangeString (s, mods);
+		//ChangeString (s, mods);
+
+		tr.ReplaceRuleWith("name",mods.Values.ToArray());
+
+		txt.text = tr.RunGrammar();
 	}
 
 
-	public void ChangeString(string stringToModify,  List<string> modifiers){
+
+
+
+
+
+
+
+	//CUSTOM
+
+	public void ChangeString(string stringToModify,  Dictionary<string, string> modifiers){
 
 		List<int> hashPoss = new List<int> ();
 
@@ -43,9 +59,9 @@ public class textswapper : MonoBehaviour {
 			for (int j = hashPoss[i]; j <= hashPoss[i+1]; j++) {
 				changeRange++;
 			}
-			print (stringToModify+" "+modifiers[0]+" "+changeRange);
-			stringToModify = stringToModify.Replace (stringToModify.Substring(hashPoss[0],changeRange), modifiers [0]);
-			print (stringToModify+" "+modifiers[0]+" "+changeRange);
+			print (stringToModify+" "+modifiers["#name#"]+" "+changeRange+" "+i);
+			stringToModify = stringToModify.Replace (stringToModify.Substring(hashPoss[0],changeRange), modifiers ["#name#"]);
+			print (stringToModify+" "+modifiers["#name#"]+" "+changeRange);
 		}
 
 		txt.text = stringToModify;
