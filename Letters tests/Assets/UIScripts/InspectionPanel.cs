@@ -4,37 +4,34 @@ using UnityEngine.UI;
 
 public class InspectionPanel : MonoBehaviour {
 
-	public Text text;
-	public Dropdown drop;
-	public AuthorUIManager authorMan;
+	[SerializeField] Text text;
+	[SerializeField] Dropdown drop;
+	[SerializeField] InputField nameIpf;
+	[SerializeField] Button nameButton;
+	[SerializeField] AuthorUIManager authorMan;
 
 	// Use this for initialization
 	void Start () {
 		authorMan = GameObject.Find("Canvas").GetComponent<AuthorUIManager>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-	public void NewObject(UIOBject obj){
+	public void InspectObject(UIOBject obj){
 		drop.gameObject.SetActive(false);
+		nameButton.gameObject.SetActive (true);
+
 		if(obj.GetType().Name == "TextObject"){
-			NewObject(obj as TextObject);
+			InspectObject(obj as TextObject);
 		}
 		else if(obj.GetType().Name == "ActionObject"){
-			NewObject(obj as ActionObject);
+			InspectObject(obj as ActionObject);
 		}
-
 	}
 
-	public void NewObject(TextObject obj){
+	public void InspectObject(TextObject obj){
 		text.text = obj.textString;
 	}
 
-	public void NewObject(ActionObject obj){
-		print("ActionObject");
+	public void InspectObject(ActionObject obj){
 		text.text = "Action. Choose action in the dropdown menu";
 		drop.gameObject.SetActive(true);
 	}
@@ -56,10 +53,17 @@ public class InspectionPanel : MonoBehaviour {
 	public void ClearInspectionPanel(){
 		text.text = "";
 		drop.gameObject.SetActive(false);
-
-
+		nameButton.gameObject.SetActive (false);
 	}
 
+	public void BeginNaming(){
+		nameIpf.gameObject.SetActive (true);
+	}
 
+	public void EndNaming(){
+		authorMan.objectBeingInspected.text.text = nameIpf.text;
+		nameIpf.text = "";
+		nameIpf.gameObject.SetActive (false);
 
+	}
 }

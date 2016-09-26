@@ -13,7 +13,6 @@ public class ActionObject : UIOBject {
 	public void ChangeType(ActionType at){
 		acType = at;
 		actionText.text = at.ToString();
-		print("changed type of "+name+" to "+acType);
 	}
 
 }

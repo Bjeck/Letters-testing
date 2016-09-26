@@ -12,7 +12,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 	public Transform startParent;
 
 	public Slot slotImOn;
-
+	[SerializeField] Image highlightIMG; 
 	AuthorUIManager authorMan;
 
 	// Use this for initialization
@@ -24,6 +24,14 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 	public void ObjClick(){
 		authorMan.InspectObject(this);
+	}
+
+	public void Highlight(){
+		highlightIMG.gameObject.SetActive (true);
+	}
+
+	public void UnHighlight(){
+		highlightIMG.gameObject.SetActive (false);
 	}
 
 
@@ -49,7 +57,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 	public void OnDrag (PointerEventData eventData)
 	{
-		transform.position = Input.mousePosition;
+		transform.position = Input.mousePosition; //Could do a Lerp here!
 	}
 
 	#endregion
@@ -63,9 +71,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 			transform.position = startPos;
 		}
 		else{
-			print("checking spawn action object "+authorMan.actionObjectReady);
 			if(authorMan.actionObjectReady == this.gameObject){
-				print("should spawn action object");
 				authorMan.SpawnNewObjectAction();
 			}
 			if(authorMan.textObjectReady == this.gameObject){
@@ -101,7 +107,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 				slotImOn = authorMan.slotBeingDraggedFrom;
 				slotImOn.objOnMe = this;
 
-				print(authorMan.objectBeingDragged);
+				print("swapped "+authorMan.objectBeingDragged);
 
 			}
 		}

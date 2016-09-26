@@ -20,22 +20,27 @@ public class AuthorUIManager : MonoBehaviour {
 	public GameObject actionObjectReady;
 	public GameObject textObjectReady;
 
-	public List<UIOBject> objectOrder = new List<UIOBject>();
-
 	public Slot slotBeingDraggedFrom;
 	public UIOBject objectBeingDragged;
 	public UIOBject objectBeingInspected;
 
-	// Use this for initialization
-	void Start () 
-	{
-	
-	}
+
+	public List<UIOBject> objectOrder = new List<UIOBject>();
+
+
+	List<string> randomActionNames = new List<string>() {"Bomb","Fun","Cause","Sauce","Flirt","Tremor","Dance","Error","Spectacle"};
+	List<string> randomLetterNames = new List<string>() {"Story","Help","Ghost","Family","Unintentional","Flight","Fall","Child"};
+
 
 	public void InspectObject(UIOBject obj)
 	{
+		if (objectBeingInspected) { //if previous object
+			objectBeingInspected.UnHighlight();
+		}
+
 		objectBeingInspected = obj;
-		inspP.NewObject(obj);
+		objectBeingInspected.Highlight ();
+		inspP.InspectObject(obj);
 	}
 
 
@@ -62,12 +67,14 @@ public class AuthorUIManager : MonoBehaviour {
 	}
 
 	public void SpawnNewObjectAction(){
-		print("Spawning action object");
 		GameObject newObject = (GameObject)Instantiate(actionObjectPrefab);
 		newObject.transform.SetParent(objectPanel.transform,false);
 		newObject.transform.position = actionObjectPoint.transform.position;
 		newObject.GetComponent<RectTransform>().localScale = Vector3.one;
 		actionObjectReady = newObject;
+
+		newObject.GetComponent<ActionObject> ().text.text = "Action "+randomActionNames [Random.Range (0, randomActionNames.Count)];
+
 	}
 
 	public void SpawnNewObjectText(){
@@ -76,5 +83,7 @@ public class AuthorUIManager : MonoBehaviour {
 		newObject.transform.position = textObjectPoint.transform.position;
 		newObject.GetComponent<RectTransform>().localScale = Vector3.one;
 		textObjectReady = newObject;
+
+		newObject.GetComponent<TextObject> ().text.text = randomLetterNames [Random.Range (0, randomLetterNames.Count)] + " Letter";
 	}
 }
