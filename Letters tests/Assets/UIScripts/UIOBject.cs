@@ -12,7 +12,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 	public Transform startParent;
 
 	public Slot slotImOn;
-	[SerializeField] Image highlightIMG; 
+	[SerializeField] Image highlightIMG;
 	AuthorUIManager authorMan;
 
 	// Use this for initialization

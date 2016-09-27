@@ -8,8 +8,6 @@ public class ActionObject : UIOBject {
 	public ActionType acType;
 	public Text actionText;
 
-
-
 	public void ChangeType(ActionType at){
 		acType = at;
 		actionText.text = at.ToString();

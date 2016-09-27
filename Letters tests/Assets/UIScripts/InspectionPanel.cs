@@ -9,15 +9,24 @@ public class InspectionPanel : MonoBehaviour {
 	[SerializeField] InputField nameIpf;
 	[SerializeField] Button nameButton;
 	[SerializeField] AuthorUIManager authorMan;
+	[SerializeField] ToggleButton tglA;
+	[SerializeField] ToggleButton tglB;
+
+	public bool a, b;
 
 	// Use this for initialization
 	void Start () {
 		authorMan = GameObject.Find("Canvas").GetComponent<AuthorUIManager>();
+		a = true;
 	}
 
 	public void InspectObject(UIOBject obj){
 		drop.gameObject.SetActive(false);
+
 		nameButton.gameObject.SetActive (true);
+		tglA.gameObject.SetActive(true);
+		tglB.gameObject.SetActive(true);
+
 
 		if(obj.GetType().Name == "TextObject"){
 			InspectObject(obj as TextObject);
@@ -28,10 +37,11 @@ public class InspectionPanel : MonoBehaviour {
 	}
 
 	public void InspectObject(TextObject obj){
-		text.text = obj.textString;
+		text.text = a ? obj.a.textString : obj.b.textString;
 	}
 
 	public void InspectObject(ActionObject obj){
+
 		text.text = "Action. Choose action in the dropdown menu";
 		drop.gameObject.SetActive(true);
 	}
@@ -54,6 +64,9 @@ public class InspectionPanel : MonoBehaviour {
 		text.text = "";
 		drop.gameObject.SetActive(false);
 		nameButton.gameObject.SetActive (false);
+		tglA.gameObject.SetActive(false);
+		tglB.gameObject.SetActive(false);
+
 	}
 
 	public void BeginNaming(){
@@ -64,6 +77,34 @@ public class InspectionPanel : MonoBehaviour {
 		authorMan.objectBeingInspected.text.text = nameIpf.text;
 		nameIpf.text = "";
 		nameIpf.gameObject.SetActive (false);
+	}
+
+	/// <summary>
+	/// Toggles a or b for inspection in the UIObject. 
+	/// </summary>
+	/// <param name="a">If set to <c>true</c> a will be true and b will be false. If set to false, b will be true.</param>
+	public void ToggleAB(ToggleButton tgl){
+
+		string aa = tgl.gameObject.name;
+
+		if(aa == "A Toggle"){
+			a = true;
+			b = false;
+			tglB.isOn = false;
+			tglB.CheckColor();
+		}
+		else if(aa == "B Toggle"){
+			a = false;
+			b = true;
+			tglA.isOn = false;
+			tglA.CheckColor();
+		}
+
+		print(aa+"     "+a+" "+b);
+
+
+		InspectObject(authorMan.objectBeingInspected);
+		//tglA.CheckColor();
 
 	}
 }

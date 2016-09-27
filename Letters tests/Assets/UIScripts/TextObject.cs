@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TextObject : UIOBject {
 
-	public string textString;
+	public TextContent a,b;
+
+//	public string textString;
 
 }

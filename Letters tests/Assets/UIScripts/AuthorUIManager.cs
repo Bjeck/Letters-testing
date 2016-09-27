@@ -37,8 +37,8 @@ public class AuthorUIManager : MonoBehaviour {
 		if (objectBeingInspected) { //if previous object
 			objectBeingInspected.UnHighlight();
 		}
-
 		objectBeingInspected = obj;
+
 		objectBeingInspected.Highlight ();
 		inspP.InspectObject(obj);
 	}
