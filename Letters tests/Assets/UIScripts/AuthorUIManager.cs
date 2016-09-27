@@ -45,7 +45,11 @@ public class AuthorUIManager : MonoBehaviour {
 
 
 	public void ChangeActionObjectType(ActionType at){
-		(objectBeingInspected as ActionObject).ChangeType(at);
+		if (inspP.UIOBjectSide ()) {
+			(objectBeingInspected as ActionObject).a.ChangeType (at);
+		} else {
+			(objectBeingInspected as ActionObject).b.ChangeType (at);
+		}
 	}
 
 
@@ -56,7 +60,6 @@ public class AuthorUIManager : MonoBehaviour {
 		foreach(Slot s in slots.GetComponentsInChildren<Slot>()){
 			if(s.objOnMe){
 				objectOrder.Add(s.objOnMe);
-				print("SLOT "+s.objOnMe.name);
 			}
 		}
 	}

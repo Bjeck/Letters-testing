@@ -41,23 +41,43 @@ public class InspectionPanel : MonoBehaviour {
 	}
 
 	public void InspectObject(ActionObject obj){
-
 		text.text = "Action. Choose action in the dropdown menu";
-		drop.gameObject.SetActive(true);
+		drop.gameObject.SetActive (true);
+		print (obj.a.acType + " " + obj.b.acType);
+		drop.value = DropdownValueStringTranslation (a ? obj.a.acType : obj.b.acType);
 	}
-
 
 	public void HandleDropdownChange(){
 		string s = drop.options[drop.value].text;
 		if(s=="Phonecall"){
 			authorMan.ChangeActionObjectType(ActionType.Phonecall);
 		}
-		else if(s=="Webpage Error"){
-			authorMan.ChangeActionObjectType(ActionType.webPageError);
+		else if(s=="WebPageError"){
+			authorMan.ChangeActionObjectType(ActionType.WebPageError);
 		}
-		else if(s=="Word Substitution"){
-			authorMan.ChangeActionObjectType(ActionType.wordSubstitution);
+		else if(s=="WordSubstitution"){
+			authorMan.ChangeActionObjectType(ActionType.WordSubstitution);
 		}
+	}
+
+	private int DropdownValueStringTranslation(ActionType at){
+
+
+		print(drop.options [(int)at].text); // THIS IS THE CLUE. I CAN FIGURE THIS OUT. I KNOW I CAN.
+
+
+
+		for (int i = 0; i < drop.options.Count; i++) {
+			if (at.ToString () == drop.options [i].text) {
+				print ("FOUND MATCH " + i + " " + at.ToString () + " " + drop.options [i].text);
+				return i;
+			}
+		}
+
+
+
+		Debug.LogError ("REACHED bottom of dropdown list without finding any matches. Check your strings?");
+		return 0;
 	}
 
 	public void ClearInspectionPanel(){
@@ -99,12 +119,15 @@ public class InspectionPanel : MonoBehaviour {
 			tglA.isOn = false;
 			tglA.CheckColor();
 		}
-
-		print(aa+"     "+a+" "+b);
-
-
-		InspectObject(authorMan.objectBeingInspected);
-		//tglA.CheckColor();
-
+		InspectObject(authorMan.objectBeingInspected); //calls inspect to show the new side of the current UIObject.
 	}
+
+	/// <summary>
+	/// Returns what side (A or B) the current inspected object is currently on.
+	/// </summary>
+	/// <returns>Returns <c>true</c>, if A, <c>false</c> if B.</returns>
+	public bool UIOBjectSide(){
+		return a ? a : b;
+	}
+
 }

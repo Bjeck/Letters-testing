@@ -2,15 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public enum ActionType{webPageError,Phonecall,wordSubstitution}
+public enum ActionType{WebPageError,Phonecall,WordSubstitution}
 
 public class ActionObject : UIOBject {
-	public ActionType acType;
-	public Text actionText;
+	public ActionContent a, b;
 
-	public void ChangeType(ActionType at){
-		acType = at;
-		actionText.text = at.ToString();
-	}
 
 }
