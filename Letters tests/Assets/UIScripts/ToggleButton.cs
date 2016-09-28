@@ -17,8 +17,7 @@ public class ToggleButton : Toggle {
 		}
 		base.OnPointerClick(eventData);
 
-		// override the color such that the toggle state of the button is obvious
-		// by its color. 
+		// override the color such that the toggle state of the button is obvious by its color. 
 		if (isOn) {
 			image.color = this.colors.pressedColor;            
 		} else {

@@ -40,14 +40,23 @@ public class AuthorUIManager : MonoBehaviour {
 		objectBeingInspected = obj;
 
 		objectBeingInspected.Highlight ();
-		inspP.InspectObject(obj);
+		inspP.tglA.isOn = true; inspP.tglA.CheckColor(); inspP.ToggleAB(inspP.tglA); //sort of ugly, but it works to set the Toggle correctly upon first click.
+//		inspP.InspectObject(obj);
+//		inspP.tglA.isOn = true; inspP.tglA.CheckColor();
 	}
 
 
+	/// <summary>
+	/// Changes the ActionType of the currently Inspected object.
+	/// </summary>
+	/// <param name="at">ActionType you want it to change to.</param>
 	public void ChangeActionObjectType(ActionType at){
+		print("A? "+inspP.UIOBjectSide());
 		if (inspP.UIOBjectSide ()) {
+			print("changing side A "+at);
 			(objectBeingInspected as ActionObject).a.ChangeType (at);
 		} else {
+			print("changing side B "+at);
 			(objectBeingInspected as ActionObject).b.ChangeType (at);
 		}
 	}
@@ -77,6 +86,8 @@ public class AuthorUIManager : MonoBehaviour {
 		actionObjectReady = newObject;
 
 		newObject.GetComponent<ActionObject> ().text.text = "Action "+randomActionNames [Random.Range (0, randomActionNames.Count)];
+		newObject.GetComponent<ActionObject> ().a.ChangeType(ActionType.Phonecall);
+		newObject.GetComponent<ActionObject> ().b.ChangeType(ActionType.Phonecall);
 
 	}
 

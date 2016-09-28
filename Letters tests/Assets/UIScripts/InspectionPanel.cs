@@ -9,8 +9,8 @@ public class InspectionPanel : MonoBehaviour {
 	[SerializeField] InputField nameIpf;
 	[SerializeField] Button nameButton;
 	[SerializeField] AuthorUIManager authorMan;
-	[SerializeField] ToggleButton tglA;
-	[SerializeField] ToggleButton tglB;
+	public ToggleButton tglA;
+	public ToggleButton tglB;
 
 	public bool a, b;
 
@@ -43,41 +43,12 @@ public class InspectionPanel : MonoBehaviour {
 	public void InspectObject(ActionObject obj){
 		text.text = "Action. Choose action in the dropdown menu";
 		drop.gameObject.SetActive (true);
-		print (obj.a.acType + " " + obj.b.acType);
-		drop.value = DropdownValueStringTranslation (a ? obj.a.acType : obj.b.acType);
+		print ("A: "+obj.a.acType + "  B: " + obj.b.acType+" now looking at "+a+" "+b);
+		drop.value = (a ? (int)obj.a.acType : (int)obj.b.acType);
 	}
 
 	public void HandleDropdownChange(){
-		string s = drop.options[drop.value].text;
-		if(s=="Phonecall"){
-			authorMan.ChangeActionObjectType(ActionType.Phonecall);
-		}
-		else if(s=="WebPageError"){
-			authorMan.ChangeActionObjectType(ActionType.WebPageError);
-		}
-		else if(s=="WordSubstitution"){
-			authorMan.ChangeActionObjectType(ActionType.WordSubstitution);
-		}
-	}
-
-	private int DropdownValueStringTranslation(ActionType at){
-
-
-		print(drop.options [(int)at].text); // THIS IS THE CLUE. I CAN FIGURE THIS OUT. I KNOW I CAN.
-
-
-
-		for (int i = 0; i < drop.options.Count; i++) {
-			if (at.ToString () == drop.options [i].text) {
-				print ("FOUND MATCH " + i + " " + at.ToString () + " " + drop.options [i].text);
-				return i;
-			}
-		}
-
-
-
-		Debug.LogError ("REACHED bottom of dropdown list without finding any matches. Check your strings?");
-		return 0;
+		authorMan.ChangeActionObjectType((ActionType)drop.value);
 	}
 
 	public void ClearInspectionPanel(){
@@ -127,7 +98,7 @@ public class InspectionPanel : MonoBehaviour {
 	/// </summary>
 	/// <returns>Returns <c>true</c>, if A, <c>false</c> if B.</returns>
 	public bool UIOBjectSide(){
-		return a ? a : b;
+		if(a) return true; else return false;
 	}
 
 }
