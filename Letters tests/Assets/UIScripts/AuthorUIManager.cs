@@ -15,6 +15,7 @@ public class AuthorUIManager : MonoBehaviour {
 	[SerializeField] GameObject textObjectPoint;
 
 	public InspectionPanel inspP;
+	[SerializeField] StoryManager storyMan;
 	public GameObject slots;
 
 	public GameObject actionObjectReady;
@@ -25,6 +26,7 @@ public class AuthorUIManager : MonoBehaviour {
 	public UIOBject objectBeingInspected;
 
 
+	public string currentStory = "temp";
 	public List<UIOBject> objectOrder = new List<UIOBject>();
 
 
@@ -100,4 +102,38 @@ public class AuthorUIManager : MonoBehaviour {
 
 		newObject.GetComponent<TextObject> ().text.text = randomLetterNames [Random.Range (0, randomLetterNames.Count)] + " Letter";
 	}
+
+
+	/// <summary>
+	/// For starting a new story.
+	/// </summary>
+	/// <param name="name">Name.</param>
+	public void StartStoryEditing(string name){
+
+		//CLEAR WHATEVER IS PRESENT IN SLOTS
+
+
+		currentStory = name;
+	}
+
+	/// <summary>
+	/// For loading a story.
+	/// </summary>
+	/// <param name="name">Name.</param>
+	/// <param name="list">List.</param>
+	public void StartStoryEditing(string name, List<UIOBject> list){
+		currentStory = name;
+		objectOrder = list;
+
+		//SOMETHING THAT FILLS IN THE ACTUAL SLOTS
+
+	}
+
+
+	public void SaveStory(){
+		storyMan.SaveStory (currentStory, objectOrder);
+	}
+
+
+
 }

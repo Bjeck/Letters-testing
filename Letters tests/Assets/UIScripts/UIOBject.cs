@@ -18,7 +18,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 	// Use this for initialization
 	void Start () {
 		startPos = transform.position;
-		authorMan = GameObject.Find("Canvas").GetComponent<AuthorUIManager>();
+		authorMan = GameObject.Find("StoryCanvas").GetComponent<AuthorUIManager>();
 	}
 
 

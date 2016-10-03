@@ -16,7 +16,6 @@ public class InspectionPanel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		authorMan = GameObject.Find("Canvas").GetComponent<AuthorUIManager>();
 		a = true;
 	}
 

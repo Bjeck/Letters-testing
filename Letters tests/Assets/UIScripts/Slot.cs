@@ -8,7 +8,7 @@ public class Slot : MonoBehaviour, IDropHandler {
 	public UIOBject objOnMe;
 
 	public void Start(){
-		authorMan = GameObject.Find("Canvas").GetComponent<AuthorUIManager>();
+		authorMan = GameObject.Find("StoryCanvas").GetComponent<AuthorUIManager>();
 	}
 
 
