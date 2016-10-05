@@ -1,0 +1,5 @@
+LETTERS STORY --------------- 
+ok2 --------------- 
+TEXT.This is text content A|This is B¤Opening
+ACTION.0|0¤Chaos
+

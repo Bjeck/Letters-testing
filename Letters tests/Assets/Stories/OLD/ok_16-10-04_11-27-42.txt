@@ -1,0 +1,5 @@
+LETTERS STORY --------------- 
+ok --------------- 
+TEXT.This is text content A|This is B¤Letter 1
+ACTION.0|0¤Action 1
+

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public enum ObjectType{Letter, Action}
 
@@ -17,6 +18,7 @@ public class AuthorUIManager : MonoBehaviour {
 	public InspectionPanel inspP;
 	[SerializeField] StoryManager storyMan;
 	public GameObject slots;
+	public List<Slot> allSlots = new List<Slot>();
 
 	public GameObject actionObjectReady;
 	public GameObject textObjectReady;
@@ -72,12 +74,27 @@ public class AuthorUIManager : MonoBehaviour {
 			if(s.objOnMe){
 				objectOrder.Add(s.objOnMe);
 			}
+			if (!allSlots.Contains (s)) {
+				allSlots.Add (s);
+			}
 		}
 	}
 
 	public void AddSlotToList(){
+		print ("Add slot");
 		GameObject newSlot = (GameObject)Instantiate(slotPrefab,slots.transform);
 		newSlot.GetComponent<RectTransform>().localScale = Vector3.one;
+		allSlots.Add (newSlot.GetComponent<Slot> ());
+	}
+
+	public void RemoveSlotFromList(){
+
+		Slot toRemove = allSlots [allSlots.Count - 1];
+		allSlots.Remove (toRemove);
+		if (toRemove.objOnMe != null) {
+			Destroy (toRemove.objOnMe.gameObject);
+		}
+		Destroy (toRemove.gameObject);
 	}
 
 	public void SpawnNewObjectAction(){
@@ -103,32 +120,79 @@ public class AuthorUIManager : MonoBehaviour {
 		newObject.GetComponent<TextObject> ().text.text = randomLetterNames [Random.Range (0, randomLetterNames.Count)] + " Letter";
 	}
 
+	public void LoadTextObject(string a, string b, string nam){
+		AddSlotToList ();
+		TextObject t = textObjectReady.GetComponent<TextObject> ();
+		t.a.textString = a;
+		t.b.textString = b;
+
+		foreach(Slot s in slots.GetComponentsInChildren<Slot>()){
+			if (s.objOnMe == null) {
+				s.DropObjectOnMe (t);
+				break;
+			}
+		}
+		t.text.text = nam;
+
+		SpawnNewObjectText ();
+
+	}
+
+	public void LoadActionObject(string a, string b, string nam){
+		AddSlotToList ();
+		ActionObject t = actionObjectReady.GetComponent<ActionObject> ();
+		print("LOADING ACTION "+a+" "+b);
+		t.a.actionText.text = a;
+
+		t.a.ChangeType ((ActionType)int.Parse (a));
+		t.b.actionText.text = b;
+		t.b.ChangeType ((ActionType)int.Parse (b));
+
+		foreach(Slot s in slots.GetComponentsInChildren<Slot>()){
+			if (s.objOnMe == null) {
+				s.DropObjectOnMe (t);
+				break;
+			}
+		}
+		t.text.text = nam;
+
+		SpawnNewObjectAction ();
+	}
+
+
+
+	public void ClearStoryFromUI(){
+		//Clear whatever is present in the slots.
+		List<UIOBject> sls = new List<UIOBject> ();
+		foreach (Transform t in slots.transform) {		//THIS IS STUPID BUT MY BRAIN DOESN'T WANT TO FIGURE OUT THE RIGHT WAY.
+			sls.Add (t.GetComponent<Slot>().objOnMe);
+		}
+
+		if (sls.Count > 0) {
+			for (int i = 0; i < sls.Count; i++) {
+				if (sls [i] != null) {
+					print (i);
+					sls [i].transform.SetParent (null);
+					Destroy (sls [i]);
+				}
+			}
+		}
+
+		//clear all slots except one.
+		for (int i = 0; i < slots.transform.childCount-1; i++) {
+			RemoveSlotFromList ();
+		}
+	}
 
 	/// <summary>
-	/// For starting a new story.
+	/// Called to set up the final parts of the editor that needs to work.
 	/// </summary>
 	/// <param name="name">Name.</param>
 	public void StartStoryEditing(string name){
-
-		//CLEAR WHATEVER IS PRESENT IN SLOTS
-
-
 		currentStory = name;
+		RefreshObjectList ();
 	}
-
-	/// <summary>
-	/// For loading a story.
-	/// </summary>
-	/// <param name="name">Name.</param>
-	/// <param name="list">List.</param>
-	public void StartStoryEditing(string name, List<UIOBject> list){
-		currentStory = name;
-		objectOrder = list;
-
-		//SOMETHING THAT FILLS IN THE ACTUAL SLOTS
-
-	}
-
+		
 
 	public void SaveStory(){
 		storyMan.SaveStory (currentStory, objectOrder);

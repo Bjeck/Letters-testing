@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -8,7 +9,11 @@ public class InspectionPanel : MonoBehaviour {
 	[SerializeField] Dropdown drop;
 	[SerializeField] InputField nameIpf;
 	[SerializeField] Button nameButton;
+	[SerializeField] Transform actionParent;
+	[SerializeField] List<GameObject> actionTypes = new List<GameObject>();
+	[SerializeField] Button actionSaveButton;
 	[SerializeField] AuthorUIManager authorMan;
+	[SerializeField] InputField webpageerrorIPF;
 	public ToggleButton tglA;
 	public ToggleButton tglB;
 
@@ -21,11 +26,13 @@ public class InspectionPanel : MonoBehaviour {
 
 	public void InspectObject(UIOBject obj){
 		drop.gameObject.SetActive(false);
-
 		nameButton.gameObject.SetActive (true);
 		tglA.gameObject.SetActive(true);
 		tglB.gameObject.SetActive(true);
-
+		actionSaveButton.gameObject.SetActive (false);
+		foreach (Transform t in actionParent) {
+			t.gameObject.SetActive (false);
+		}
 
 		if(obj.GetType().Name == "TextObject"){
 			InspectObject(obj as TextObject);
@@ -42,12 +49,18 @@ public class InspectionPanel : MonoBehaviour {
 	public void InspectObject(ActionObject obj){
 		text.text = "Action. Choose action in the dropdown menu";
 		drop.gameObject.SetActive (true);
+		actionSaveButton.gameObject.SetActive (true);
+		int acval = a ? (int)obj.a.acType : (int)obj.b.acType;
 		print ("A: "+obj.a.acType + "  B: " + obj.b.acType+" now looking at "+a+" "+b);
-		drop.value = (a ? (int)obj.a.acType : (int)obj.b.acType);
+		drop.value = (acval);
+		print (acval);
+		actionParent.GetChild (acval).gameObject.SetActive (true);
+
 	}
 
 	public void HandleDropdownChange(){
 		authorMan.ChangeActionObjectType((ActionType)drop.value);
+		InspectObject (authorMan.objectBeingInspected);
 	}
 
 	public void ClearInspectionPanel(){
@@ -91,6 +104,32 @@ public class InspectionPanel : MonoBehaviour {
 		}
 		InspectObject(authorMan.objectBeingInspected); //calls inspect to show the new side of the current UIObject.
 	}
+
+
+	public void SaveAction(){
+		ActionObject ao = authorMan.objectBeingInspected as ActionObject;
+		int acval = a ? (int)ao.a.acType : (int)ao.b.acType;
+
+		switch (acval) {
+		case 0: //Phonecall
+			
+			break;
+		case 1: //Webpage error
+			if (a) {
+				ao.a.actionString = "<" + webpageerrorIPF.text + ">";
+			} else {
+				ao.b.actionString = "<" + webpageerrorIPF.text + ">";
+			}
+
+			break;
+		case 2: //word substitution
+
+			break;
+		}
+
+	}
+
+
 
 	/// <summary>
 	/// Returns what side (A or B) the current inspected object is currently on.

@@ -7,7 +7,7 @@ public class Slot : MonoBehaviour, IDropHandler {
 	public AuthorUIManager authorMan;
 	public UIOBject objOnMe;
 
-	public void Start(){
+	public void Awake(){
 		authorMan = GameObject.Find("StoryCanvas").GetComponent<AuthorUIManager>();
 	}
 
@@ -17,12 +17,20 @@ public class Slot : MonoBehaviour, IDropHandler {
 
 	public void OnDrop (PointerEventData eventData)
 	{
-		authorMan.objectBeingDragged.transform.SetParent(transform);
-		objOnMe = authorMan.objectBeingDragged;
-		authorMan.objectBeingDragged.slotImOn = this;
-		authorMan.RefreshObjectList();
-		print("DROPPED ON "+gameObject.name);
+		DropObjectOnMe (authorMan.objectBeingDragged);
 	}
 
 	#endregion
+
+	public void DropObjectOnMe(UIOBject obj){
+		if (obj != null) {
+			obj.transform.SetParent(transform);
+			objOnMe = obj;
+			obj.slotImOn = this;
+			authorMan.RefreshObjectList();
+			print(obj.name + " DROPPED ON "+gameObject.name);
+		}
+	}
+
+
 }
