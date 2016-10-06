@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class InspectionPanel : MonoBehaviour {
 
-	[SerializeField] Text text;
-	[SerializeField] Dropdown drop;
-	[SerializeField] InputField nameIpf;
-	[SerializeField] Button nameButton;
-	[SerializeField] Transform actionParent;
-	[SerializeField] List<GameObject> actionTypes = new List<GameObject>();
-	[SerializeField] Button actionSaveButton;
-	[SerializeField] AuthorUIManager authorMan;
-	[SerializeField] InputField webpageerrorIPF;
+	[SerializeField] InspectionPanelActionHelper ipah;
+	[SerializeField] public Text text;
+	[SerializeField] public Dropdown drop;
+	[SerializeField] public InputField nameIpf;
+	[SerializeField] public Button nameButton;
+	[SerializeField] public Transform actionParent;
+	[SerializeField] public List<GameObject> actionTypes = new List<GameObject>();
+	[SerializeField] public Button actionSaveButton;
+	[SerializeField] public AuthorUIManager authorMan;
+	[SerializeField] public InputField webpageerrorIPF;
 	public ToggleButton tglA;
 	public ToggleButton tglB;
 
@@ -55,7 +56,7 @@ public class InspectionPanel : MonoBehaviour {
 		drop.value = (acval);
 		print (acval);
 		actionParent.GetChild (acval).gameObject.SetActive (true);
-
+		ipah.ActionFillIn((ActionType)acval,obj);
 	}
 
 	public void HandleDropdownChange(){
@@ -104,32 +105,6 @@ public class InspectionPanel : MonoBehaviour {
 		}
 		InspectObject(authorMan.objectBeingInspected); //calls inspect to show the new side of the current UIObject.
 	}
-
-
-	public void SaveAction(){
-		ActionObject ao = authorMan.objectBeingInspected as ActionObject;
-		int acval = a ? (int)ao.a.acType : (int)ao.b.acType;
-
-		switch (acval) {
-		case 0: //Phonecall
-			
-			break;
-		case 1: //Webpage error
-			if (a) {
-				ao.a.actionString = "<" + webpageerrorIPF.text + ">";
-			} else {
-				ao.b.actionString = "<" + webpageerrorIPF.text + ">";
-			}
-
-			break;
-		case 2: //word substitution
-
-			break;
-		}
-
-	}
-
-
 
 	/// <summary>
 	/// Returns what side (A or B) the current inspected object is currently on.

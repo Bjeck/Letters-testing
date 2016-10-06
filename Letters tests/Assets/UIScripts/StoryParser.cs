@@ -16,6 +16,7 @@ public class StoryParser : MonoBehaviour {
 	}
 
 	public string SaveStoryToFile(string nam, string storyString){
+
 		fileName = "Assets/Stories/" + nam + "_" + DateTime.Now.ToString("yy-MM-dd_hh-mm-ss") + ".txt";
 
 		if (File.Exists(fileName))
@@ -62,13 +63,13 @@ public class StoryParser : MonoBehaviour {
 						print (l);
 						string[] sides = l.Split ('|');
 
-						storyMan.authorMan.LoadTextObject (sides [0], sides [1], sides [2]);
+						storyMan.authorMan.LoadTextObject (sides);//(sides [0], sides [1], sides [2]);
 					} else if (l.Substring (0, 7) == "ACTION.") {
 						//ACTION
 						l = l.Remove (0, 7);
 						print (l);
 						string[] sides = l.Split ('|');
-						storyMan.authorMan.LoadActionObject (sides [0], sides [1], sides [4]);
+						storyMan.authorMan.LoadActionObject (sides);//(sides [0], sides [1], sides [4]);
 					}
 				}
 			}

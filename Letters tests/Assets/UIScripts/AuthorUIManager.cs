@@ -120,8 +120,10 @@ public class AuthorUIManager : MonoBehaviour {
 		newObject.GetComponent<TextObject> ().text.text = randomLetterNames [Random.Range (0, randomLetterNames.Count)] + " Letter";
 	}
 
-	public void LoadTextObject(string a, string b, string nam){
+	public void LoadTextObject(string[] sides){//(string a, string b, string nam){
 		AddSlotToList ();
+		string a = sides[0]; string b = sides[1];
+
 		TextObject t = textObjectReady.GetComponent<TextObject> ();
 		t.a.textString = a;
 		t.b.textString = b;
@@ -132,21 +134,26 @@ public class AuthorUIManager : MonoBehaviour {
 				break;
 			}
 		}
-		t.text.text = nam;
+		t.text.text = sides[2];
 
 		SpawnNewObjectText ();
 
 	}
 
-	public void LoadActionObject(string a, string b, string nam){
+	public void LoadActionObject(string[] sides){//(string a, string b, string nam){
 		AddSlotToList ();
+		string a = sides[0]; string b = sides[1];
+
 		ActionObject t = actionObjectReady.GetComponent<ActionObject> ();
 		print("LOADING ACTION "+a+" "+b);
-		t.a.actionText.text = a;
 
+		t.a.actionText.text = a;
 		t.a.ChangeType ((ActionType)int.Parse (a));
 		t.b.actionText.text = b;
 		t.b.ChangeType ((ActionType)int.Parse (b));
+		t.a.actionString = sides[2];
+		t.b.actionString = sides[3];
+
 
 		foreach(Slot s in slots.GetComponentsInChildren<Slot>()){
 			if (s.objOnMe == null) {
@@ -154,7 +161,7 @@ public class AuthorUIManager : MonoBehaviour {
 				break;
 			}
 		}
-		t.text.text = nam;
+		t.text.text = sides[4];
 
 		SpawnNewObjectAction ();
 	}

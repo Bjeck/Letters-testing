@@ -110,7 +110,9 @@ public class StoryManager : MonoBehaviour {
 	}
 
 
-
+	/// <summary>
+	/// Loads the stories present in the local folder into dictionary. atm. should access the database and load those files instead.
+	/// </summary>
 	public void LoadStoriesIntoDictionary(){
 		DirectoryInfo levelDirectoryPath = new DirectoryInfo(Application.dataPath);
 		FileInfo[] fileInfo = levelDirectoryPath.GetFiles("*.*", SearchOption.AllDirectories);
