@@ -1,6 +1,0 @@
-LETTERS STORY --------------- 
-teststory --------------- 
-TEXT.This is text content A|This is B
-ACTION.WebPageError|Phonecall
-TEXT.This isn't at all text content A|This is B
-

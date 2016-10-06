@@ -1,7 +1,0 @@
-LETTERS STORY --------------- 
-okforeal_16-10-04_02-23-25.txt --------------- 
-ACTION.0|0|This is it
-TEXT.This is text content A|This is B|A letter to your friend
-ACTION.0|0|Action Sauce
-TEXT.This is text content A|This is B|Story Letter
-

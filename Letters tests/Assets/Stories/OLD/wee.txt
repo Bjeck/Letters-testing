@@ -1,4 +1,0 @@
-wee --------------- 
-ACTION.Phonecall|Phonecall
-TEXT.This is text content A|This is B
-TEXT.This is text content A|This is B

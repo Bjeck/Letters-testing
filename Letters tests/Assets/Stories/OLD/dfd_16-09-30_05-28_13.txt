@@ -1,4 +1,0 @@
-dfd --------------- 
-ACTION.Phonecall|Phonecall
-TEXT.This is text content A|This is B
-

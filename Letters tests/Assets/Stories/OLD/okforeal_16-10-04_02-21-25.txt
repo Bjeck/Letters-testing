@@ -1,8 +1,0 @@
-LETTERS STORY --------------- 
-okforeal --------------- 
-LETTERS STORY --------------- 
-okforeal --------------- 
-ACTION.0|0|This is it
-TEXT.This is text content A|This is B|A letter to your friend
-
-
