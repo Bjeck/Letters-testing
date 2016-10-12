@@ -1,0 +1,6 @@
+LETTERS STORY --------------- 
+DEBUG_16-10-03_04-22-09.txt --------------- 
+TEXT.This is text content A|This is B
+ACTION.2|1
+TEXT.This is text content A|This is B
+

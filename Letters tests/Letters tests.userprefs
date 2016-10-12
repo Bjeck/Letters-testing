@@ -1,0 +1,27 @@
+﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CopyPasteFromJava.cs">
+    <Files>
+      <File FileName="Assets\UIScripts\AuthorUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\InspectionPanel.cs" Line="73" Column="3" />
+      <File FileName="Assets\UIScripts\UIOBject.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\ActionObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\TextObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\Slot.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\DeleteBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\ActionContent.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\StoryManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\StoryParser.cs" Line="1" Column="1" />
+      <File FileName="Assets\TextFileDownloader.cs" Line="46" Column="1" />
+      <File FileName="Assets\UIScripts\StoryButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Playerscene\PlayerSceneManager.cs" Line="73" Column="3" />
+      <File FileName="Assets\urldetector.cs" Line="5" Column="43" />
+      <File FileName="Assets\Stories\temp_16-10-04_05-22-07.txt" Line="1" Column="1" />
+      <File FileName="Assets\CopyPasteFromJava.cs" Line="17" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

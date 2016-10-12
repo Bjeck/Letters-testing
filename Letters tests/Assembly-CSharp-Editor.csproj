@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{5BBEB80A-48F6-655D-957F-E885BA884598}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_1;UNITY_5_4;UNITY_5;UNITY_ANALYTICS;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_WEBGL;UNITY_WEBGL_API;UNITY_DISABLE_WEB_VERIFICATION;ENABLE_TEXTUREID_MAP;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_IL2CPP;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Cradle\Editor\ThirdParty\PhantomJS\Install.cs" />
+     <Compile Include="Assets\Cradle\TwineTextPlayer\Editor\TwineTextPlayerElementEditor.cs" />
+     <None Include="Assets\Stories\uhm_16-10-05_10-30-57.txt_16-10-05_01-03-42.txt" />
+     <None Include="Assets\Stories\OLD\did you know_16-10-03_02-19-14.txt_16-10-03_03-13-39.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-59.txt" />
+     <None Include="Assets\Stories\uhm_16-10-05_10-30-57.txt_16-10-05_01-04-13.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-38-16.txt" />
+     <None Include="Assets\Stories\OLD\ok2_16-10-04_11-29-20.txt" />
+     <None Include="Assets\Stories\OLD\did you know_16-10-03_02-19-14.txt_16-10-03_03-13-47.txt" />
+     <None Include="Assets\Stories\OLD\okforeal_16-10-04_02-21-39.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-27-48.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt" />
+     <None Include="Assets\Stories\OLD\MyFile.txt" />
+     <None Include="Assets\Stories\uhm_16-10-05_10-30-57.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-23-19.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-28-17.txt" />
+     <None Include="Assets\Stories\uhm_16-10-05_10-30-57.txt_16-10-05_12-50-59.txt" />
+     <None Include="Assets\Stories\temp_16-10-04_04-28-08.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-59.txt_16-10-03_02-49-47.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-26-03.txt" />
+     <None Include="Assets\Stories\temp_16-10-04_05-21-40.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt_16-10-03_02-54-34.txt_16-10-03_03-14-50.txt" />
+     <None Include="Assets\Stories\OLD\temp_16-10-03_04-15-44.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt_16-10-03_04-48-44.txt" />
+     <None Include="Assets\Stories\OLD\Manager_16-10-03_12-41-10.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-22-03.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt_16-10-03_03-12-46.txt" />
+     <None Include="Assets\Stories\OLD\okforeal_16-10-04_02-23-25.txt_16-10-04_02-23-37.txt" />
+     <None Include="Assets\Stories\OLD\ok_16-10-04_11-27-42.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-48-39.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-48-37.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-44-34.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt_16-10-03_03-12-05.txt" />
+     <None Include="Assets\Stories\OLD\Manager_16-10-03_02-15-26.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_03-14-45.txt" />
+     <None Include="Assets\Stories\OLD\yes_16-10-03_02-19-37.txt" />
+     <None Include="Assets\Stories\OLD\fa_16-09-30--05-21.txt" />
+     <None Include="Assets\Stories\OLD\wee.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-48-32.txt" />
+     <None Include="Assets\Stories\temp_16-10-05_09-56-56.txt" />
+     <None Include="Assets\Stories\OLD\okforeal_16-10-04_02-21-51.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt_16-10-03_03-12-46.txt_16-10-03_03-14-59.txt" />
+     <None Include="Assets\Stories\OLD\df_16-09-30-05-21.txt" />
+     <None Include="Assets\Stories\uhm_16-10-05_10-30-57.txt_16-10-05_12-50-30.txt" />
+     <None Include="Assets\Stories\OLD\okforeal_16-10-04_02-23-25.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-29-51.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-41-19.txt" />
+     <None Include="Assets\Cradle\Editor\ThirdParty\PhantomJS\third-party.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-59.txt_16-10-03_02-54-30.txt" />
+     <None Include="Assets\Stories\OLD\okforeal_16-10-04_02-21-25.txt" />
+     <None Include="Assets\ToCopyToHtmlFile.txt" />
+     <None Include="Assets\Stories\hello_16-10-07_02-32-51.txt" />
+     <None Include="Assets\Stories\OLD\did you know_16-10-03_02-19-14.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt_16-10-03_03-12-42.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-25-16.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-22-03.txt_16-10-03_02-40-17.txt" />
+     <None Include="Assets\Stories\OLD\teststory_16-10-03_11-07_05.txt" />
+     <None Include="Assets\Stories\temp_16-10-04_05-22-07.txt" />
+     <None Include="Assets\Stories\uhm_16-10-05_10-30-57.txt_16-10-05_12-51-28.txt" />
+     <None Include="Assets\Stories\OLD\Manager_16-10-03_02-15-25.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-22-09.txt" />
+     <None Include="Assets\Stories\uhm_16-10-05_10-30-57.txt_16-10-05_01-02-56.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-42-54.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_03-14-45.txt_16-10-03_04-48-47.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-39-49.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-41-04.txt" />
+     <None Include="Assets\Stories\OLD\dfd_16-09-30_05-28_13.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-22-09.txt_16-10-03_04-48-41.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-37-08.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-39-30.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt_16-10-03_02-54-34.txt" />
+     <None Include="Assets\Stories\uhm_16-10-05_10-30-57.txt_16-10-05_01-06-12.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-40-16.txt" />
+     <None Include="Assets\Stories\OLD\Manager_16-10-03_02-15-26.txt_16-10-03_04-48-49.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-17-19.txt" />
+     <None Include="Assets\Stories\OLD\DEBUG_16-10-03_04-39-01.txt" />
+     <None Include="Assets\Stories\OLD\i see_16-10-03_02-21-46.txt_16-10-03_02-51-08.txt_16-10-03_02-54-34.txt_16-10-03_03-14-50.txt_16-10-03_03-15-12.txt" />
+ <Reference Include="UnityEditor.Advertisements">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/EditorTestsRunner/Editor/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.EditorTestsRunner">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/EditorTestsRunner/Editor/UnityEditor.EditorTestsRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.TreeEditor">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="Cradle">
+ <HintPath>/Users/bjarkelarsen/Desktop/Letters tests/Assets/Cradle/Cradle.dll</HintPath>
+ </Reference>
+ <Reference Include="Cradle.Editor">
+ <HintPath>/Users/bjarkelarsen/Desktop/Letters tests/Assets/Cradle/Editor/Cradle.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Nustache.Core">
+ <HintPath>/Users/bjarkelarsen/Desktop/Letters tests/Assets/Cradle/Editor/ThirdParty/Nustache/Nustache.Core.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.WebGL.Extensions">
+ <HintPath>/Applications/Unity/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+ <HintPath>/Applications/Unity/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+ <HintPath>/Applications/Unity/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.OSXStandalone.Extensions">
+ <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{E0972738-A2C2-BB75-2F83-42BA074F66AC}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

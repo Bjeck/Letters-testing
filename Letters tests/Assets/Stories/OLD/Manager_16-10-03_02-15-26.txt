@@ -1,0 +1,8 @@
+LETTERS STORY --------------- 
+Manager --------------- 
+TEXT.This is text content A|This is B
+ACTION.2|1
+TEXT.This is text content A|This is B
+ACTION.2|0
+TEXT.This is text content A|This is B
+

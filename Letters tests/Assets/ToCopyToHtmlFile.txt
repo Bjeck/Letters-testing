@@ -1,0 +1,22 @@
+<script>
+function urlFunction(  )
+  {
+    SendMessage("PlayerSceneManager", "GetSceneFunction", window.location.href);
+  }
+</script>
+
+<script>
+function WebpageError( s )
+  {
+    alert(s);
+  }
+</script>
+
+<script>
+function CopyPaste() {
+    var link = prompt("Please enter link", "link");
+    if (link != null) {
+    SendMessage("PlayerSceneManager", "ReceivePaste", link);
+    }
+}
+</script>
