@@ -87,7 +87,7 @@ public class StoryManager : MonoBehaviour {
 			if (obj.GetType ().Equals (typeof(TextObject))) {
 				TextObject t = obj as TextObject;
 
-				story += "TEXT." + t.a.textString + "|" + t.b.textString;
+				story += "TEXT." + t.a.letterString + "|" + t.b.letterString;
 
 			} 
 			else if (obj.GetType ().Equals (typeof(ActionObject))) {

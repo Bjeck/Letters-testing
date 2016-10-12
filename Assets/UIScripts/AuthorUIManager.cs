@@ -121,8 +121,8 @@ public class AuthorUIManager : MonoBehaviour {
 		string a = sides[0]; string b = sides[1];
 
 		TextObject t = textObjectReady.GetComponent<TextObject> ();
-		t.a.textString = a;
-		t.b.textString = b;
+		t.a.letterString = a;
+		t.b.letterString = b;
 
 		foreach(Slot s in slots.GetComponentsInChildren<Slot>()){
 			if (s.objOnMe == null) {
@@ -143,9 +143,9 @@ public class AuthorUIManager : MonoBehaviour {
 		ActionObject t = actionObjectReady.GetComponent<ActionObject> ();
 		print("LOADING ACTION "+a+" "+b);
 
-		t.a.actionText.text = a;
+		t.a.actionTypeText.text = a;
 		t.a.ChangeType ((ActionType)int.Parse (a));
-		t.b.actionText.text = b;
+		t.b.actionTypeText.text = b;
 		t.b.ChangeType ((ActionType)int.Parse (b));
 		t.a.actionString = sides[2];
 		t.b.actionString = sides[3];

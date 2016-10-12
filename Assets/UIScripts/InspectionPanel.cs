@@ -15,11 +15,15 @@ public class InspectionPanel : MonoBehaviour {
 	[SerializeField] public Button actionSaveButton;
 	public InputField textLinkInput;
 	[SerializeField] public AuthorUIManager authorMan;
-	[SerializeField] public InputField webpageerrorIPF;
 	public ToggleButton tglA;
 	public ToggleButton tglB;
 
 	public bool a, b;
+
+	public InputField webpageerrorIPF;
+	public InputField QuestionniareQIPF;
+	public InputField QuestionniareA1IPF;
+	public InputField QuestionniareA2IPF;
 
 	// Use this for initialization
 	void Start () {
@@ -48,7 +52,7 @@ public class InspectionPanel : MonoBehaviour {
 	public void InspectObject(TextObject obj){
 		textLinkInput.gameObject.SetActive (true);
 
-		text.text = a ? obj.a.textString : obj.b.textString;
+		text.text = a ? obj.a.letterString : obj.b.letterString;
 	}
 
 	public void InspectObject(ActionObject obj){
@@ -78,12 +82,12 @@ public class InspectionPanel : MonoBehaviour {
 		TextObject t = authorMan.objectBeingInspected as TextObject;
 
 		if (a) {
-			t.a.textString = www.text;
+			t.a.letterString = www.text;
 		} else {
-			t.b.textString = www.text;
+			t.b.letterString = www.text;
 		}
 
-		text.text = a ? t.a.textString : t.b.textString;
+		text.text = a ? t.a.letterString : t.b.letterString;
 	}
 
 

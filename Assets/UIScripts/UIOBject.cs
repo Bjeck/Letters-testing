@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 	public Slot slotImOn;
 	[SerializeField] Image highlightIMG;
 	AuthorUIManager authorMan;
+
+	public int id;
 
 	// Use this for initialization
 	void Start () {
