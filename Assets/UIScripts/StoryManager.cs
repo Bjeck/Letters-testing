@@ -37,11 +37,12 @@ public class StoryManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Loads the story. For Debugging
+	/// Loads the story. For Debugging. DOESN'T WORK ANYMORE.
 	/// </summary>
 	public void LoadStory(){
 		authorMan.StartStoryEditing ("DEBUG");
 		sp.LoadStory ("Manager_16-10-03_12-41-10.txt");
+		authorMan.FinalStartStoryEditing ();
 		ExitMenu ();
 	}
 
@@ -52,12 +53,14 @@ public class StoryManager : MonoBehaviour {
 	public void LoadStory(string s){
 		authorMan.StartStoryEditing (s);
 		sp.LoadStory (s);
+		authorMan.FinalStartStoryEditing ();
 		ExitMenu ();
 	}
 
 	public void LoadStory(string n, string full){
 		authorMan.StartStoryEditing (n);
 		sp.LoadStoryFullString(n,full);
+		authorMan.FinalStartStoryEditing ();
 		ExitMenu ();
 	}
 
@@ -79,26 +82,25 @@ public class StoryManager : MonoBehaviour {
 
 		string story = "";
 
-
-
 		foreach (UIOBject obj in list) {		//Parsing all the objects into a single string.
-			
-
 			if (obj.GetType ().Equals (typeof(TextObject))) {
 				TextObject t = obj as TextObject;
 
-				story += "TEXT." + t.a.letterString + "|" + t.b.letterString;
+				story += "TEXT." + obj.text.text + "|" + obj.id; 
+				story += "|" + t.a.letterString + "|" + t.b.letterString;
 
 			} 
 			else if (obj.GetType ().Equals (typeof(ActionObject))) {
 				ActionObject t = obj as ActionObject;
 
-				story += "ACTION." + (int)t.a.acType + "|" + (int)t.b.acType;
+				story += "ACTION." + obj.text.text + "|" + obj.id;
+				story += "|" + (int)t.a.acType + "|" + (int)t.b.acType;
 				story += "|" + t.a.actionString + "|" + t.b.actionString;
 			}
+
+			//NEED TO ADD LINKS
 				
-			story += "|"+obj.text.text;
-			story += "\n";
+			story += "\n"; //new line to indicate new object
 		}
 
 		sp.SaveStoryToFile (nam, story); 

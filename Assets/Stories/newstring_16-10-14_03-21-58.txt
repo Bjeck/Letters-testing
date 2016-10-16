@@ -1,0 +1,5 @@
+LETTERS STORY --------------- 
+newstring --------------- 
+ACTION.Action Sauce|0|1|0|hello there, this is an error|
+TEXT.Unintentional Letter|1||
+

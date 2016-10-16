@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class TextObject : UIOBject {
 
 	public TextContent a,b;
-	public List<UIOBject> links = new List<UIOBject>();
+	public UIOBject link;
 //	public string textString;
 
 }

@@ -7,6 +7,8 @@ public enum ObjectType{Letter, Action}
 
 public class AuthorUIManager : MonoBehaviour {
 
+	[SerializeField] bool startWithDebug = false;
+
 	[SerializeField] GameObject slotPrefab;
 	[SerializeField] GameObject actionObjectPrefab;
 	[SerializeField] GameObject textObjectPrefab;
@@ -32,8 +34,17 @@ public class AuthorUIManager : MonoBehaviour {
 	public List<UIOBject> objectOrder = new List<UIOBject>();
 
 
+	public int maxID = 0;
+
 	List<string> randomActionNames = new List<string>() {"Bomb","Fun","Cause","Sauce","Flirt","Tremor","Dance","Error","Spectacle"};
 	List<string> randomLetterNames = new List<string>() {"Story","Help","Ghost","Family","Unintentional","Flight","Fall","Child"};
+
+	void Start(){
+		if(startWithDebug){
+			StartStoryEditing ("DEBUG");
+			FinalStartStoryEditing ();
+		}
+	}
 
 
 	public void InspectObject(UIOBject obj)
@@ -54,8 +65,8 @@ public class AuthorUIManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="at">ActionType you want it to change to.</param>
 	public void ChangeActionObjectType(ActionType at){
-		print("A? "+inspP.UIObjectSide());
-		if (inspP.UIObjectSide ()) {
+		print("A? "+inspP.a);
+		if (inspP.a) {
 			print("changing side A "+at);
 			(objectBeingInspected as ActionObject).a.ChangeType (at);
 		} else {
@@ -94,19 +105,25 @@ public class AuthorUIManager : MonoBehaviour {
 	}
 
 	public void SpawnNewObjectAction(){
+		
 		GameObject newObject = (GameObject)Instantiate(actionObjectPrefab);
 		newObject.transform.SetParent(objectPanel.transform,false);
 		newObject.transform.position = actionObjectPoint.transform.position;
 		newObject.GetComponent<RectTransform>().localScale = Vector3.one;
 		actionObjectReady = newObject;
 
-		newObject.GetComponent<ActionObject> ().text.text = "Action "+randomActionNames [Random.Range (0, randomActionNames.Count)];
-		newObject.GetComponent<ActionObject> ().a.ChangeType(ActionType.Phonecall);
-		newObject.GetComponent<ActionObject> ().b.ChangeType(ActionType.Phonecall);
+		ActionObject aobj = newObject.GetComponent<ActionObject> ();
 
+		aobj.text.text = "Action "+randomActionNames [Random.Range (0, randomActionNames.Count)];
+		aobj.a.ChangeType(ActionType.Phonecall);
+		aobj.b.ChangeType(ActionType.Phonecall);
+		aobj.id = maxID;
+		print("spawning action "+maxID);
+		IterateMaxID ();
 	}
 
 	public void SpawnNewObjectText(){
+
 		GameObject newObject = (GameObject)Instantiate(textObjectPrefab);
 		newObject.transform.SetParent(objectPanel.transform,false);
 		newObject.transform.position = textObjectPoint.transform.position;
@@ -114,13 +131,25 @@ public class AuthorUIManager : MonoBehaviour {
 		textObjectReady = newObject;
 
 		newObject.GetComponent<TextObject> ().text.text = randomLetterNames [Random.Range (0, randomLetterNames.Count)] + " Letter";
+		newObject.GetComponent<TextObject> ().id = maxID;
+		print("spawning text "+maxID);
+		IterateMaxID ();
+
 	}
 
 	public void LoadTextObject(string[] sides){//(string a, string b, string nam){
+		print("loading text");
 		AddSlotToList ();
-		string a = sides[0]; string b = sides[1];
+
+		if (textObjectReady == null) {
+			SpawnNewObjectText ();
+		}
 
 		TextObject t = textObjectReady.GetComponent<TextObject> ();
+		t.text.text = sides[0];
+		t.id = int.Parse(sides [1]);
+		string a = sides[2]; string b = sides[3];
+
 		t.a.letterString = a;
 		t.b.letterString = b;
 
@@ -130,25 +159,33 @@ public class AuthorUIManager : MonoBehaviour {
 				break;
 			}
 		}
-		t.text.text = sides[2];
 
 		SpawnNewObjectText ();
 
 	}
 
 	public void LoadActionObject(string[] sides){//(string a, string b, string nam){
-		AddSlotToList ();
-		string a = sides[0]; string b = sides[1];
+		print("loading action");
 
+		AddSlotToList ();
+
+		if (actionObjectReady == null) {
+			SpawnNewObjectAction ();
+		}
+			
 		ActionObject t = actionObjectReady.GetComponent<ActionObject> ();
+		t.text.text = sides[0];
+		t.id = int.Parse(sides [1]);
+		string a = sides[2]; string b = sides[3];
+
 		print("LOADING ACTION "+a+" "+b);
 
 		t.a.actionTypeText.text = a;
 		t.a.ChangeType ((ActionType)int.Parse (a));
 		t.b.actionTypeText.text = b;
 		t.b.ChangeType ((ActionType)int.Parse (b));
-		t.a.actionString = sides[2];
-		t.b.actionString = sides[3];
+		t.a.actionString = sides[4];
+		t.b.actionString = sides[5];
 
 
 		foreach(Slot s in slots.GetComponentsInChildren<Slot>()){
@@ -157,7 +194,6 @@ public class AuthorUIManager : MonoBehaviour {
 				break;
 			}
 		}
-		t.text.text = sides[4];
 
 		SpawnNewObjectAction ();
 	}
@@ -185,6 +221,10 @@ public class AuthorUIManager : MonoBehaviour {
 		for (int i = 0; i < slots.transform.childCount-1; i++) {
 			RemoveSlotFromList ();
 		}
+
+		Destroy (textObjectReady);
+		Destroy (actionObjectReady);
+
 	}
 
 	/// <summary>
@@ -193,8 +233,50 @@ public class AuthorUIManager : MonoBehaviour {
 	/// <param name="name">Name.</param>
 	public void StartStoryEditing(string name){
 		currentStory = name;
-		RefreshObjectList ();
+		maxID = 0;
+
+		if (actionObjectReady == null) {
+			SpawnNewObjectAction ();
+		}
+		if (textObjectReady == null) {
+			SpawnNewObjectText ();
+		}
 	}
+
+	public void FinalStartStoryEditing(){ //IT SKIPS 4??????
+		
+		RefreshObjectList ();
+	//	FindMaxID ();
+	 //DON'T NEED THIS NOW
+	}
+
+
+	void IterateMaxID(){
+		maxID += 1;
+	}
+
+/*	public void FindMaxID(){
+		print ("BEF " + maxID);
+		foreach (UIOBject o in objectOrder) {
+			if (o.id > maxID) {
+				maxID = o.id;
+				print ("FOUND " + maxID);
+			}
+
+		}
+		print ("IS " + maxID);
+		if (textObjectReady.GetComponent<UIOBject> ().id > maxID) {
+			maxID = textObjectReady.GetComponent<UIOBject> ().id;
+		}
+		if (actionObjectReady.GetComponent<UIOBject> ().id > maxID) {
+			maxID = actionObjectReady.GetComponent<UIOBject> ().id;
+		}
+		print ("CHANGED TO " + maxID);
+		maxID = maxID + 1; //setting it to be one higher, since we iterate AFTER setting it, when spawning
+	}
+*/
+
+
 		
 
 	public void SaveStory(){
