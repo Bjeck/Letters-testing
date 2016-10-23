@@ -12,6 +12,7 @@ public class AuthorUIManager : MonoBehaviour {
 	[SerializeField] GameObject slotPrefab;
 	[SerializeField] GameObject actionObjectPrefab;
 	[SerializeField] GameObject textObjectPrefab;
+	[SerializeField] GameObject objectShadowPrefab;
 
 	[SerializeField] GameObject objectPanel;
 	[SerializeField] GameObject actionObjectPoint;
@@ -32,7 +33,7 @@ public class AuthorUIManager : MonoBehaviour {
 
 	public string currentStory = "temp";
 	public List<UIOBject> objectOrder = new List<UIOBject>();
-
+	public List<ShadowObject> shadowObjects = new List<ShadowObject>();
 
 	public int maxID = 0;
 
@@ -281,6 +282,33 @@ public class AuthorUIManager : MonoBehaviour {
 
 	public void SaveStory(){
 		storyMan.SaveStory (currentStory, objectOrder);
+	}
+
+
+
+	public void ShadowMode (){
+		print ("SHADOW MODE");
+		foreach (UIOBject obj in objectOrder) {
+			if (obj == objectBeingInspected) {
+				continue;
+			}
+			GameObject shadow = (GameObject)Instantiate (objectShadowPrefab);
+			shadow.transform.SetParent (obj.transform.parent.parent.parent.parent.parent,false);
+			shadow.transform.position = obj.transform.position;
+			ShadowObject sh = shadow.GetComponent<ShadowObject> ();
+			sh.SetupLink (obj);
+			shadowObjects.Add (sh);
+			//shadow.transform.localScale = Vector3.one;
+		}
+	}
+
+	public void ExitShadowMode(){
+
+		for (int i = 0; i < shadowObjects.Count; i++) {
+			Destroy (shadowObjects [i].gameObject);
+			shadowObjects.Remove (shadowObjects [i]);
+		}
+
 	}
 
 

@@ -42,6 +42,9 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 	#region IBeginDragHandler implementation
 	public void OnBeginDrag (PointerEventData eventData)
 	{
+		if (authorMan.inspP.IsInspectingLinks ()) {
+			return;
+		}
 		isDragging = true;
 		startPos = transform.position;
 		startParent = transform.parent;
@@ -60,6 +63,9 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 	public void OnDrag (PointerEventData eventData)
 	{
+		if (authorMan.inspP.IsInspectingLinks ()) {
+			return;
+		}
 		transform.position = Input.mousePosition; //Could do a Lerp here!
 	}
 
@@ -69,6 +75,9 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 	public void OnEndDrag (PointerEventData eventData)
 	{
+		if (authorMan.inspP.IsInspectingLinks ()) {
+			return;
+		}
 		isDragging = false;
 		if(transform.parent == startParent){
 			transform.position = startPos;

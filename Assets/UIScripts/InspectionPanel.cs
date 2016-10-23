@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 
-public enum Side {a, b, c}
-
 public class InspectionPanel : MonoBehaviour {
 
 	[SerializeField] InspectionPanelActionHelper ipah;
@@ -150,6 +148,7 @@ public class InspectionPanel : MonoBehaviour {
 
 			tglC.isOn = false;
 			tglC.CheckColor ();
+			authorMan.ExitShadowMode ();
 		} else if (tgl == tglB) {
 			a = false;
 			b = true;
@@ -159,16 +158,16 @@ public class InspectionPanel : MonoBehaviour {
 
 			tglC.isOn = false;
 			tglC.CheckColor ();
+			authorMan.ExitShadowMode ();
 		} else if (tgl == tglC) {
 			a = false;
 			b = false;
 			c = true;
-
 			tglA.isOn = false;
 			tglB.isOn = false;
 			tglA.CheckColor ();
 			tglB.CheckColor ();
-
+			authorMan.ShadowMode ();
 		}
 		InspectObject(authorMan.objectBeingInspected); //calls inspect to show the new side of the current UIObject.
 	}
