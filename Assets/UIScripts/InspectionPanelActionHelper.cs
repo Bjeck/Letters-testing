@@ -9,8 +9,21 @@ public class InspectionPanelActionHelper : MonoBehaviour {
 	[SerializeField] InspectionPanel ip;
 
 
-	public void ActionFillIn(ActionType act, ActionObject obj){
+	public void LinkFillIn(ActionObject obj){
+		ShadowSlot[] sllss = ip.linkSetupAction.GetComponentsInChildren<ShadowSlot> ();
+		print("adding links");
+		int k = 0;
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 2; j++) {
+				if(obj.links[i,j] != null){
+					ip.authorMan.SpawnShadowObjectOnSlot(sllss[k],obj.links[i,j]);
+				}
+				k++;
+			}
+		}
+	}
 
+	public void ActionFillIn(ActionType act, ActionObject obj){
 		switch(act){
 		case ActionType.Phonecall:
 
@@ -43,15 +56,14 @@ public class InspectionPanelActionHelper : MonoBehaviour {
 		ActionObject ao = ip.authorMan.objectBeingInspected as ActionObject;
 		if (ip.IsInspectingLinks ()) 
 		{
-			Slot[] sllss = ip.linkSetupAction.GetComponentsInChildren<Slot> ();
-			print ("length "+sllss.Length);
+			ShadowSlot[] sllss = ip.linkSetupAction.GetComponentsInChildren<ShadowSlot> ();
 
 			int k = 0;
 			for (int i = 0; i < 2; i++) {
 				for (int j = 0; j < 2; j++) {
 					if (sllss [k].objOnMe != null) {
-						ao.links [i,j] = sllss [i + j].objOnMe;
-						print (i + " " + j + " now has " + sllss [k].objOnMe.name + " in "+k);
+						ao.links [i,j] = sllss [k].objOnMe.objectlink;
+						print (i + " " + j + " now has " + sllss [k].objOnMe.text.text + " in "+k);
 					}
 					k++;
 				}
@@ -75,7 +87,7 @@ public class InspectionPanelActionHelper : MonoBehaviour {
 
 				break;
 			case ActionType.WordSubstitution: //word substitution
-
+				
 				break;
 			case ActionType.Questionnaire:
 				if (ip.a) {

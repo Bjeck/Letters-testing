@@ -29,7 +29,7 @@ public class AuthorUIManager : MonoBehaviour {
 	public Slot slotBeingDraggedFrom;
 	public UIOBject objectBeingDragged;
 	public UIOBject objectBeingInspected;
-
+	public ShadowObject shadowObjectBeingDragged;
 
 	public string currentStory = "temp";
 	public List<UIOBject> objectOrder = new List<UIOBject>();
@@ -302,12 +302,32 @@ public class AuthorUIManager : MonoBehaviour {
 		}
 	}
 
-	public void ExitShadowMode(){
+	public void SpawnNewShadowObject(UIOBject obj){
+		GameObject shadow = (GameObject)Instantiate (objectShadowPrefab);
+		shadow.transform.SetParent (obj.transform.parent.parent.parent.parent.parent,false);
+		shadow.transform.position = obj.transform.position;
+		ShadowObject sh = shadow.GetComponent<ShadowObject> ();
+		sh.SetupLink (obj);
+		shadowObjects.Add (sh);
+	}
 
+	public void SpawnShadowObjectOnSlot(ShadowSlot slot, UIOBject link){
+		GameObject shadow = (GameObject)Instantiate (objectShadowPrefab);
+		shadow.transform.SetParent (slot.transform,false);
+		shadow.transform.position = slot.transform.position;
+		ShadowObject sh = shadow.GetComponent<ShadowObject> ();
+		sh.SetupLink (link);
+		shadowObjects.Add (sh);
+	}
+
+	public void ExitShadowMode(){
+		print("Destroying all shadows "+shadowObjects.Count);
 		for (int i = 0; i < shadowObjects.Count; i++) {
+			print(i);
 			Destroy (shadowObjects [i].gameObject);
-			shadowObjects.Remove (shadowObjects [i]);
 		}
+		shadowObjects.Clear();
+		print(shadowObjects.Count);
 
 	}
 

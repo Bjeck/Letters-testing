@@ -14,7 +14,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 	public Slot slotImOn;
 	[SerializeField] Image highlightIMG;
-	AuthorUIManager authorMan;
+	public AuthorUIManager authorMan;
 
 	public int id;
 
@@ -79,7 +79,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 			return;
 		}
 		isDragging = false;
-		if(transform.parent == startParent){
+		if(transform.parent == startParent){	//failsafe. if parent hasn't changed (edited by OnDrop in Slot) move the object back to original position.
 			transform.position = startPos;
 		}
 		else{
@@ -101,7 +101,10 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
 	#region IDropHandler implementation
-
+	/// <summary>
+	/// For dropping a UIObject on another, for swapping.
+	/// </summary>
+	/// <param name="eventData">Event data.</param>
 	public void OnDrop (PointerEventData eventData)
 	{
 		if(authorMan.objectBeingDragged){

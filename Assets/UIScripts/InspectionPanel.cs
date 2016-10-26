@@ -74,13 +74,14 @@ public class InspectionPanel : MonoBehaviour {
 	}
 
 	public void InspectObject(ActionObject obj){
-		
+		print("inspecting "+obj.text.text);
 
 		actionSaveButton.gameObject.SetActive (true);
 		//CHECK IF C, IF NOT GO AHEAD WITH THAT
 		if (IsInspectingLinks ()) {
 			text.text = "Action. Choose links here.";
 			linkSetupAction.SetActive (true);
+			ipah.LinkFillIn(obj);
 		} 
 		else {
 			
@@ -168,6 +169,7 @@ public class InspectionPanel : MonoBehaviour {
 			tglA.CheckColor ();
 			tglB.CheckColor ();
 			authorMan.ShadowMode ();
+
 		}
 		InspectObject(authorMan.objectBeingInspected); //calls inspect to show the new side of the current UIObject.
 	}

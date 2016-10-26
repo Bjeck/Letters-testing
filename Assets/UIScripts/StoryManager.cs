@@ -89,6 +89,8 @@ public class StoryManager : MonoBehaviour {
 				story += "TEXT." + obj.text.text + "|" + obj.id; 
 				story += "|" + t.a.letterString + "|" + t.b.letterString;
 
+				//NEED TO ADD LINKS HERE.
+
 			} 
 			else if (obj.GetType ().Equals (typeof(ActionObject))) {
 				ActionObject t = obj as ActionObject;
@@ -96,11 +98,24 @@ public class StoryManager : MonoBehaviour {
 				story += "ACTION." + obj.text.text + "|" + obj.id;
 				story += "|" + (int)t.a.acType + "|" + (int)t.b.acType;
 				story += "|" + t.a.actionString + "|" + t.b.actionString;
+
+
+				story += "|";
+
+				for (int i = 0; i < 2; i++) {
+					for (int j = 0; j < 2; j++) {
+						if(t.links[i,j] != null){
+							story += t.links[i,j].id;
+						}
+						story += "#";
+					}
+				}
 			}
 
-			//NEED TO ADD LINKS
-				
+			print(story);
+
 			story += "\n"; //new line to indicate new object
+
 		}
 
 		sp.SaveStoryToFile (nam, story); 

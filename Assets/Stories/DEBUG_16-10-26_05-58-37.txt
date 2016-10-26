@@ -1,0 +1,7 @@
+LETTERS STORY --------------- 
+DEBUG --------------- 
+ACTION.Action Bomb|0|0|0|||2#2#2#2#
+ACTION.Action Sauce|2|0|0|||3#0#4#3#
+ACTION.Action Spectacle|3|0|0|||####
+ACTION.Action Fun|4|0|0|||####
+

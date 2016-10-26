@@ -2,35 +2,32 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IDropHandler {
+public class ShadowSlot : MonoBehaviour, IDropHandler {
 
 	[SerializeField] AuthorUIManager authorMan;
-	public UIOBject objOnMe;
+	public ShadowObject objOnMe;
 
 	public void Awake(){
 		authorMan = GameObject.Find("StoryCanvas").GetComponent<AuthorUIManager>();
 	}
 
 
-
 	#region IDropHandler implementation
 
 	public void OnDrop (PointerEventData eventData)
 	{
-		DropObjectOnMe (authorMan.objectBeingDragged);
+		DropObjectOnMe (authorMan.shadowObjectBeingDragged);
 	}
 
 	#endregion
 
-	public void DropObjectOnMe(UIOBject obj){
+	public void DropObjectOnMe(ShadowObject obj){
+		print("beginning drop");
 		if (obj != null) {
 			obj.transform.SetParent(transform);
 			objOnMe = obj;
 			obj.slotImOn = this;
-			authorMan.RefreshObjectList();
 			print(obj.name + " DROPPED ON "+gameObject.name);
 		}
 	}
-
-
 }
