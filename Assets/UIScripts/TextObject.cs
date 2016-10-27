@@ -5,6 +5,9 @@ public class TextObject : UIOBject {
 
 	public TextContent a,b;
 	public UIOBject link;
-//	public string textString;
+
+	public void SetLink(UIOBject l){
+		link = l;
+	}
 
 }

@@ -53,11 +53,22 @@ public class AuthorUIManager : MonoBehaviour {
 		if (objectBeingInspected) { //if previous object
 			objectBeingInspected.UnHighlight();
 		}
+
+		//SAVE
+		inspP.SaveObjectInfo();
+
 		objectBeingInspected = obj;
+		if(obj.GetType().Name == "TextObject"){
+			inspP.inspectingAction = false;
+		}
+		else if(obj.GetType().Name == "ActionObject"){
+			inspP.inspectingAction = true;
+		}
 
-		objectBeingInspected.Highlight ();
-		inspP.tglA.isOn = true; inspP.tglA.CheckColor(); inspP.ToggleAB(inspP.tglA); //sort of ugly, but it works to set the Toggle correctly upon first click.
-
+		objectBeingInspected.Highlight (); 
+		//inspP.tglA.isOn = true; inspP.tglA.CheckColor(); 
+		//inspP.InspectObject(obj); 
+		inspP.ToggleAB(inspP.tglA); //sort of ugly, but it works to set the Toggle correctly upon first click.
 	}
 
 
@@ -151,6 +162,9 @@ public class AuthorUIManager : MonoBehaviour {
 		t.id = int.Parse(sides [1]);
 		string a = sides[2]; string b = sides[3];
 
+		a = a.Replace("§",System.Environment.NewLine);
+		b = b.Replace("§",System.Environment.NewLine);
+
 		t.a.letterString = a;
 		t.b.letterString = b;
 
@@ -188,7 +202,6 @@ public class AuthorUIManager : MonoBehaviour {
 		t.a.actionString = sides[4];
 		t.b.actionString = sides[5];
 
-
 		foreach(Slot s in slots.GetComponentsInChildren<Slot>()){
 			if (s.objOnMe == null) {
 				s.DropObjectOnMe (t);
@@ -199,6 +212,65 @@ public class AuthorUIManager : MonoBehaviour {
 		SpawnNewObjectAction ();
 	}
 
+	/// <summary>
+	/// Loads links for all objects. Has to do this after all objects exist.
+	/// </summary>
+	public void LoadLinks(string l){
+		string[] linkPerObj = l.Split ('\n');	//splitting apart each object
+
+		int i = 0;
+		foreach(UIOBject obj in objectOrder){
+
+			string[] links = linkPerObj[i].Split('#');	//splitting apart each link.
+
+			if(links[1] == obj.id.ToString()){
+				if(links[0] == "A"){
+					ActionObject t = (ActionObject)obj;
+					UIOBject[,] tempLinks = new UIOBject[2,2];
+
+					for (int j = 2; j < 6; j++) {
+						foreach(UIOBject otherObj in objectOrder){
+							if(otherObj == obj){
+								continue;
+							}
+							if(links[j] == otherObj.id.ToString()){
+								if(j-2 == 0){
+									tempLinks[0,0] = otherObj;
+								}
+								else if(j-2 == 1){
+									tempLinks[0,1] = otherObj;
+								}
+								else if(j-2 == 2){
+									tempLinks[1,0] = otherObj;
+								}
+								else if(j-2 == 3){
+									tempLinks[1,1] = otherObj;
+								}
+							}
+						}
+					}
+					t.links = tempLinks;
+				}
+				else if(links[0] == "T"){
+					
+					TextObject t = (TextObject)obj;
+					UIOBject templink = null;
+					foreach(UIOBject otherObj in objectOrder){
+						if(otherObj == obj){
+							continue;
+						}
+						if(links[2] == otherObj.id.ToString()){
+							templink = otherObj;
+						}
+					}
+					print("TEMP LINK "+templink);
+					t.link = templink;
+				}
+			}
+			i++;
+		}
+
+	}
 
 
 	public void ClearStoryFromUI(){

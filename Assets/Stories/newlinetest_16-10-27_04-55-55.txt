@@ -1,0 +1,6 @@
+LETTERS STORY --------------- 
+newlinetest --------------- 
+TEXT.Help Letter|1|this is a 
+new line
+help||
+

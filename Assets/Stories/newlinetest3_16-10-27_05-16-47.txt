@@ -1,0 +1,7 @@
+LETTERS STORY --------------- 
+newlinetest3 --------------- 
+TEXT.Ghost Letter|1|I wonder
+if 
+this will work now
+.||
+

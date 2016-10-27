@@ -87,9 +87,15 @@ public class StoryManager : MonoBehaviour {
 				TextObject t = obj as TextObject;
 
 				story += "TEXT." + obj.text.text + "|" + obj.id; 
-				story += "|" + t.a.letterString + "|" + t.b.letterString;
+				string lta = t.a.letterString.Replace(System.Environment.NewLine,"§");
+				string ltb =t.b.letterString.Replace(System.Environment.NewLine,"§");
+				story += "|" + lta + "|" + ltb;
 
 				//NEED TO ADD LINKS HERE.
+				story += "|";
+				if(t.link != null){
+					story += t.link.id;
+				}
 
 			} 
 			else if (obj.GetType ().Equals (typeof(ActionObject))) {

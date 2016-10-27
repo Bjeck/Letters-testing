@@ -1,0 +1,7 @@
+LETTERS STORY --------------- 
+theexplodingradio! --------------- 
+TEXT.Story Letter|1|||0
+ACTION.Action Spectacle|0|0|0|||3#3#3#3#
+ACTION.Action Tremor|3|3|1|Answer me this!¤text¤InputField (2) (UnityEngine.UI.InputField)||####
+TEXT.Ending|2|||
+

@@ -23,6 +23,15 @@ public class InspectionPanelActionHelper : MonoBehaviour {
 		}
 	}
 
+	public void LinkFillIn(TextObject obj){
+		ShadowSlot shslot = ip.linkSetupText.GetComponentInChildren<ShadowSlot> ();
+		print("adding links");
+		int k = 0;
+		if(obj.link != null){
+			ip.authorMan.SpawnShadowObjectOnSlot(shslot,obj.link);
+		}
+	}
+
 	public void ActionFillIn(ActionType act, ActionObject obj){
 		switch(act){
 		case ActionType.Phonecall:
@@ -99,6 +108,23 @@ public class InspectionPanelActionHelper : MonoBehaviour {
 
 			}
 		}
+	}
+
+
+	public void SaveText(){
+		TextObject to = ip.authorMan.objectBeingInspected as TextObject;
+
+		if (ip.IsInspectingLinks ()) 
+		{
+			ShadowSlot shslot = ip.linkSetupText.GetComponentInChildren<ShadowSlot> ();
+			if(shslot.objOnMe != null){
+				to.link = shslot.objOnMe.objectlink;
+			}
+		}
+		else {
+			//Non link stuff (TEXT!)
+		}
+
 
 	}
 

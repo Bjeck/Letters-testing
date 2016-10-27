@@ -46,6 +46,7 @@ public class StoryParser : MonoBehaviour {
 		List<string> lines = new List<string>(fullString.Split(new string[] { "\r","\n" },System.StringSplitOptions.RemoveEmptyEntries) );
 
 		try{
+			string links = "";
 			foreach(string line in lines)
 			{
 				if (!String.IsNullOrEmpty (line)) {
@@ -63,16 +64,23 @@ public class StoryParser : MonoBehaviour {
 						print (l);
 						string[] sides = l.Split ('|');
 
-						storyMan.authorMan.LoadTextObject (sides);//(sides [0], sides [1], sides [2]);
+						links += "T#"+sides[1]+"#"+sides[4];  //saves ID of object and links, for the link loading later.
+						storyMan.authorMan.LoadTextObject (sides);
+
+
 					} else if (l.Substring (0, 7) == "ACTION.") {
 						//ACTION
 						l = l.Remove (0, 7);
 						print (l);
 						string[] sides = l.Split ('|');
-						storyMan.authorMan.LoadActionObject (sides);//(sides [0], sides [1], sides [4]);
+						links += "A#"+sides[1]+"#"+sides[6]; //saves ID of object and links, for the link loading later.
+						storyMan.authorMan.LoadActionObject (sides);
 					}
+					links += "\n";
 				}
 			}
+			print(links);
+			storyMan.authorMan.LoadLinks(links);
 		}
 		catch(Exception e){
 			print ("LOAD STORY FAILED " + e.Message);

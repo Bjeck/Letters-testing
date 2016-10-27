@@ -14,6 +14,8 @@ public class InspectionPanel : MonoBehaviour {
 	public ToggleButton tglA;
 	public ToggleButton tglB;
 	public ToggleButton tglC;
+	public Button editButton;
+	public InputField textInputField;
 	public Transform actionParent;
 	public List<GameObject> actionTypes = new List<GameObject>();
 	public Button actionSaveButton;
@@ -23,6 +25,7 @@ public class InspectionPanel : MonoBehaviour {
 
 
 	public bool a, b, c;
+	public bool inspectingAction = false;
 
 	public InputField webpageerrorIPF;
 	public InputField QuestionniareQIPF;
@@ -49,28 +52,33 @@ public class InspectionPanel : MonoBehaviour {
 		textLinkInput.gameObject.SetActive (false);
 		linkSetupAction.SetActive (false);
 		linkSetupText.SetActive (false);
+		editButton.gameObject.SetActive(false);
+		textInputField.gameObject.SetActive(false);
+
 		foreach (Transform t in actionParent) {
 			t.gameObject.SetActive (false);
 		}
 
-		if(obj.GetType().Name == "TextObject"){
+		if(!inspectingAction){
 			InspectObject(obj as TextObject);
 		}
-		else if(obj.GetType().Name == "ActionObject"){
+		else{
 			InspectObject(obj as ActionObject);
 		}
+
 	}
 
 	public void InspectObject(TextObject obj){
 
 		if (IsInspectingLinks ()) {
 			text.text = "Text. Choose link here.";
-			linkSetupAction.SetActive (true);
+			linkSetupText.SetActive (true);
+			ipah.LinkFillIn(obj);
 		} else {
 			text.text = a ? obj.a.letterString : obj.b.letterString;
 			textLinkInput.gameObject.SetActive (true);
+			editButton.gameObject.SetActive(true);
 		}
-
 	}
 
 	public void InspectObject(ActionObject obj){
@@ -132,13 +140,36 @@ public class InspectionPanel : MonoBehaviour {
 		nameIpf.gameObject.SetActive (false);
 	}
 
+	public void EditText(){
+		if(!textInputField.gameObject.activeInHierarchy){
+			textInputField.gameObject.gameObject.SetActive(true);
+			textInputField.text = text.text;
+		}
+		else {
+			EndEditText();
+		}
+	}
+
+	public void EndEditText(){
+		textInputField.gameObject.gameObject.SetActive(false);
+		text.text = textInputField.text;
+		TextObject t = authorMan.objectBeingInspected as TextObject;
+		if(a){
+			t.a.letterString = text.text;
+		}
+		else { 
+			t.b.letterString = text.text;
+		}
+	}
+
 	/// <summary>
 	/// Toggles a or b for inspection in the UIObject. 
 	/// </summary>
 	/// <param name="a">If set to <c>true</c> a will be true and b will be false. If set to false, b will be true.</param>
 	public void ToggleAB(ToggleButton tgl){
-		
-		ipah.SaveAction (); //saves the current action, as an autosave. Makes sure we don't lose anything when switching sides.
+
+		print("TOGGLING "+inspectingAction+" "+authorMan.objectBeingInspected);
+		SaveObjectInfo();
 
 		if (tgl == tglA) {
 			a = true;
@@ -174,6 +205,15 @@ public class InspectionPanel : MonoBehaviour {
 		InspectObject(authorMan.objectBeingInspected); //calls inspect to show the new side of the current UIObject.
 	}
 
+
+	public void SaveObjectInfo(){
+		if(inspectingAction){
+			ipah.SaveAction (); //saves the current action, as an autosave. Makes sure we don't lose anything when switching sides.
+		}
+		else {
+			ipah.SaveText ();
+		}
+	}
 
 	public void ClearInspectionPanel(){
 		text.text = "";
