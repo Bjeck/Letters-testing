@@ -66,8 +66,7 @@ public class AuthorUIManager : MonoBehaviour {
 		}
 
 		objectBeingInspected.Highlight (); 
-		//inspP.tglA.isOn = true; inspP.tglA.CheckColor(); 
-		//inspP.InspectObject(obj); 
+		inspP.tglA.isOn = true; inspP.tglA.CheckColor(); 
 		inspP.ToggleAB(inspP.tglA); //sort of ugly, but it works to set the Toggle correctly upon first click.
 	}
 
