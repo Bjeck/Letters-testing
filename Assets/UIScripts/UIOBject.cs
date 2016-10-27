@@ -56,6 +56,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 			slotImOn.objOnMe = null;
 			slotImOn = null;
 		}
+
 	}
 	#endregion
 
@@ -75,6 +76,7 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 	public void OnEndDrag (PointerEventData eventData)
 	{
+		print("end drag");
 		if (authorMan.inspP.IsInspectingLinks ()) {
 			return;
 		}
