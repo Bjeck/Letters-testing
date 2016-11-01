@@ -13,6 +13,7 @@ public class ShadowObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 	Transform startParent;
 	public ShadowSlot slotImOn;
 	bool isOnObject = true;
+	public float lerpSpeed = 2f;
 
 	public void SetupLink(UIOBject o){
 		objectlink = o;
@@ -53,7 +54,10 @@ public class ShadowObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 		if(objectlink == null){
 			return;
 		}
-		transform.position = Input.mousePosition; //Could do a Lerp here!
+	//	transform.position = Input.mousePosition; //Could do a Lerp here!
+
+		transform.position = Vector3.Lerp(transform.position,Input.mousePosition,lerpSpeed);
+
 	}
 
 	#endregion
