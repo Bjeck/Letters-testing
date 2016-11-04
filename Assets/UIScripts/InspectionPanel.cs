@@ -26,15 +26,29 @@ public class InspectionPanel : MonoBehaviour {
 
 	public bool a, b, c;
 	public bool inspectingAction = false;
+	public bool isEditingText = false;
 
 	public InputField webpageerrorIPF;
 	public InputField QuestionniareQIPF;
 	public InputField QuestionniareA1IPF;
 	public InputField QuestionniareA2IPF;
 
+	[SerializeField] Animator anim;
+	public bool visible = false;
+
 	// Use this for initialization
 	void Start () {
 	//	a = true;
+	}
+
+	// Update is called once per frame
+	void Update () {
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			if (!isEditingText) {
+				anim.SetTrigger ("slide");
+				visible = !visible;
+			}
+		}
 	}
 
 	public void InspectObject(UIOBject obj){
@@ -142,6 +156,7 @@ public class InspectionPanel : MonoBehaviour {
 
 	public void EditText(){
 		if(!textInputField.gameObject.activeInHierarchy){
+			isEditingText = true;
 			textInputField.gameObject.gameObject.SetActive(true);
 			textInputField.text = text.text;
 		}
@@ -151,6 +166,7 @@ public class InspectionPanel : MonoBehaviour {
 	}
 
 	public void EndEditText(){
+		isEditingText = false;
 		textInputField.gameObject.gameObject.SetActive(false);
 		text.text = textInputField.text;
 		TextObject t = authorMan.objectBeingInspected as TextObject;

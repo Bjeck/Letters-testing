@@ -101,9 +101,9 @@ public class InspectionPanelActionHelper : MonoBehaviour {
 				break;
 			case ActionType.Questionnaire:
 				if (ip.a) {
-					ao.a.actionString = ip.QuestionniareQIPF.text + "¤" + ip.QuestionniareA1IPF.text + "¤" + ip.QuestionniareA2IPF;
+					ao.a.actionString = ip.QuestionniareQIPF.text + "¤" + ip.QuestionniareA1IPF.text + "¤" + ip.QuestionniareA2IPF.text;
 				} else {
-					ao.b.actionString = ip.QuestionniareQIPF.text + "¤" + ip.QuestionniareA1IPF.text + "¤" + ip.QuestionniareA2IPF;
+					ao.b.actionString = ip.QuestionniareQIPF.text + "¤" + ip.QuestionniareA1IPF.text + "¤" + ip.QuestionniareA2IPF.text;
 				}
 				break;
 

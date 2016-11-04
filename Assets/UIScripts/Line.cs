@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI.Extensions;
 
 public class Line : MonoBehaviour {
 
@@ -14,9 +15,11 @@ public class Line : MonoBehaviour {
 
 	Vector3 differenceVector;
 
+	public UILineRenderer uiline;
+
 	void Awake()
 	{
-		imageRectTransform = GetComponent<RectTransform>();
+	//	imageRectTransform = GetComponent<RectTransform>();
 	}
 
 	void Start(){
@@ -32,15 +35,21 @@ public class Line : MonoBehaviour {
 	IEnumerator DrawLine()
 	{
 		while(true){
-			pointA = thingA.anchoredPosition3D + new Vector3 (fop.rect.width/2,fop.rect.width/2,0); //USE free order coordinate????? 
-			pointB = thingB.anchoredPosition3D + new Vector3 (fop.rect.width/2,fop.rect.width/2,0);
+		//	pointA = thingA.anchoredPosition3D + new Vector3 (fop.rect.width/2,fop.rect.height/2,0);
+		//	pointB = thingB.anchoredPosition3D + new Vector3 (fop.rect.width/2,fop.rect.height/2,0);
 
-			differenceVector = pointB - pointA;
-			imageRectTransform.sizeDelta = new Vector2( differenceVector.magnitude, lineWidth);
-			imageRectTransform.pivot = new Vector2(0, 0.5f);
-			imageRectTransform.position = pointA;
-			float angle = Mathf.Atan2(differenceVector.y, differenceVector.x) * Mathf.Rad2Deg;
-			imageRectTransform.rotation = Quaternion.Euler(0,0, angle);
+			uiline.Points [0] = thingA.anchoredPosition + new Vector2 (fop.rect.width/2,fop.rect.height/2);
+			uiline.Points [1] = thingB.anchoredPosition + new Vector2 (fop.rect.width/2,fop.rect.height/2);
+			uiline.SetVerticesDirty ();
+
+
+
+			//differenceVector = pointB - pointA;
+			//imageRectTransform.sizeDelta = new Vector2( differenceVector.magnitude, lineWidth);
+			//imageRectTransform.pivot = new Vector2(0, 0.5f);
+			//imageRectTransform.position = pointA;
+			//float angle = Mathf.Atan2(differenceVector.y, differenceVector.x) * Mathf.Rad2Deg;
+			//imageRectTransform.rotation = Quaternion.Euler(0,0, angle);
 
 			yield return new WaitForEndOfFrame();
 		}

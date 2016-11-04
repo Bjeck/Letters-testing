@@ -16,15 +16,11 @@ public class SlidePanelTesting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-		//print (Camera.main.WorldToScreenPoint (Input.mousePosition) +" "+Screen.width+" "+Screen.height);
-
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			anim.SetTrigger ("slide");
-			//Slide(slideIn);
 			slideIn = !slideIn;
+			//Slide(slideIn);
 		}
-
 	}
 
 
