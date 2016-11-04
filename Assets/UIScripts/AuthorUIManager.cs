@@ -18,6 +18,7 @@ public class AuthorUIManager : MonoBehaviour {
 	[SerializeField] GameObject actionObjectPoint;
 	[SerializeField] GameObject textObjectPoint;
 
+	public FreeOrderPanel orderPanel;
 	public InspectionPanel inspP;
 	[SerializeField] StoryManager storyMan;
 	public GameObject slots;
@@ -371,11 +372,25 @@ public class AuthorUIManager : MonoBehaviour {
 			shadowObjects.Add (sh);
 			//shadow.transform.localScale = Vector3.one;
 		}
+
+		foreach (UIOBject obj in orderPanel.objects) {
+			if (obj == objectBeingInspected) {
+				continue;
+			}
+			GameObject shadow = (GameObject)Instantiate (objectShadowPrefab);
+			shadow.transform.SetParent (obj.transform.parent,false);
+			shadow.transform.position = obj.transform.position;
+			ShadowObject sh = shadow.GetComponent<ShadowObject> ();
+			sh.SetupLink (obj);
+			shadowObjects.Add (sh);
+			//shadow.transform.localScale = Vector3.one;
+		}
+
 	}
 
 	public void SpawnNewShadowObject(UIOBject obj){
 		GameObject shadow = (GameObject)Instantiate (objectShadowPrefab);
-		shadow.transform.SetParent (obj.transform.parent.parent.parent.parent.parent,false);
+		shadow.transform.SetParent (obj.transform.parent,false); //parent.parent.parent.parent
 		shadow.transform.position = obj.transform.position;
 		ShadowObject sh = shadow.GetComponent<ShadowObject> ();
 		sh.SetupLink (obj);

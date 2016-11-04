@@ -21,6 +21,8 @@ public class ActionObject : UIOBject {
 
 	public void SetLink(UIOBject obj, int x, int y){
 		links [x,y] = obj;
+		authorMan.orderPanel.DrawLine(this,obj);
+		print("SET LINK");
 	}
 
 	public void SetLinks(UIOBject[,] l){

@@ -71,7 +71,8 @@ public class InspectionPanelActionHelper : MonoBehaviour {
 			for (int i = 0; i < 2; i++) {
 				for (int j = 0; j < 2; j++) {
 					if (sllss [k].objOnMe != null) {
-						ao.links [i,j] = sllss [k].objOnMe.objectlink;
+						print("DO SET LINK");
+						ao.SetLink(sllss[k].objOnMe.objectlink,i,j);
 						print (i + " " + j + " now has " + sllss [k].objOnMe.text.text + " in "+k);
 					}
 					k++;
@@ -118,7 +119,7 @@ public class InspectionPanelActionHelper : MonoBehaviour {
 		{
 			ShadowSlot shslot = ip.linkSetupText.GetComponentInChildren<ShadowSlot> ();
 			if(shslot.objOnMe != null){
-				to.link = shslot.objOnMe.objectlink;
+				to.SetLink(shslot.objOnMe.objectlink);
 			}
 		}
 		else {

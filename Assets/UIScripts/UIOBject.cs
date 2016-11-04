@@ -18,6 +18,8 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 	public int id;
 
+	float lerpSpeed = 0.7f;
+
 	// Use this for initialization
 	void Start () {
 		startPos = transform.position;
@@ -67,7 +69,9 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 		if (authorMan.inspP.IsInspectingLinks ()) {
 			return;
 		}
-		transform.position = Input.mousePosition; //Could do a Lerp here!
+//		transform.position = Input.mousePosition; //Could do a Lerp here!
+
+		transform.position = Vector3.Lerp(transform.position,Input.mousePosition,lerpSpeed);
 	}
 
 	#endregion
@@ -81,15 +85,23 @@ public class UIOBject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 			return;
 		}
 		isDragging = false;
-		if(transform.parent == startParent){	//failsafe. if parent hasn't changed (edited by OnDrop in Slot) move the object back to original position.
-			transform.position = startPos;
-		}
-		else{
-			if(authorMan.actionObjectReady == this.gameObject){
+
+		if(authorMan.actionObjectReady == this.gameObject){
+			if(transform.parent == startParent){	//failsafe. if parent hasn't changed (edited by OnDrop in Slot) move the object back to original position.
+				transform.position = startPos;
+			}
+			else{
 				authorMan.SpawnNewObjectAction();
 			}
-			if(authorMan.textObjectReady == this.gameObject){
-				authorMan.SpawnNewObjectText();
+		}
+		else if(authorMan.textObjectReady == this.gameObject){
+			if(transform.parent == startParent){	//failsafe. if parent hasn't changed (edited by OnDrop in Slot) move the object back to original position.
+				transform.position = startPos;
+			}
+			else{
+				if(authorMan.textObjectReady == this.gameObject){
+					authorMan.SpawnNewObjectText();
+				}
 			}
 		}
 

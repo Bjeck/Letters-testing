@@ -8,6 +8,7 @@ public class TextObject : UIOBject {
 
 	public void SetLink(UIOBject l){
 		link = l;
+		authorMan.orderPanel.DrawLine(this,l);
 	}
 
 }
